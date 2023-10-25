@@ -1,5 +1,6 @@
 // object1.js
 
+//클래스의 추가 메소드 작성. 프로토타입
 Member.prototype.setBloodType = function(bloodType) {
 		this.bloodType = bloodType;
 }
@@ -13,3 +14,10 @@ mem2.setBloodType('AB형');
 mem3.setBloodType('B형');
 console.log(mem2.getBloodType());
 console.log(mem3.getBloodType());
+
+String.prototype.truncate = function() {
+	console.log(this);
+	return this.substring(5,10);  // world 출력
+}
+let result = "Helloworld".truncate();
+console.log(result);
