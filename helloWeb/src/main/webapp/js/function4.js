@@ -23,7 +23,7 @@ document.getElementById('saveBtn').onclick = function (e) {
 	}
 
     const mem = new Member(name, age, height);
-    str += makeTr(mem); // <tr>.....</tr>
+    str += 	makeTr(mem); // <tr>.....</tr>
     // function Member()..., makeTr(member),
 
     document.getElementById('list').innerHTML = str;
