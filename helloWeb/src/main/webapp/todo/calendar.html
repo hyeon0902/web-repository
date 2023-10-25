@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Calendar...</title>
 <style>
 </style>
 </head>
@@ -10,26 +10,20 @@
 		<div id="show">
 			</div>
 	<script>
-		const yo = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-
 const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+const weeks = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
 const calendar = {
     html: '',
 
-    makeHead() {
-        let strHead = "";
-
-        strHead += `<table border ="1"><thead><tr>`;
-
-        for (let yoil in yo) {
-            strHead += '<th>' + yo[yoil] + '</th>';
-        }
-
-        strHead += '</tr></thead>';
-
-        this.html += strHead;
-    },
+	makeHead(){
+		let strHead = "";
+		
+		strHead += '<table border ="1">';
+		strHead += '<thead><tr>';
+		
+	},
 
     makeBody(mon) {
         let obj = this;
