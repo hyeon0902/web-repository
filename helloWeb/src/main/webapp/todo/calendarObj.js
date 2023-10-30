@@ -1,46 +1,70 @@
-//calendarObj.js
-export { cal }
+//CalendarObj.js
 
-const today = new Date();
+
 const cal = {
+	weeks: ['일', '월', '화', '수', '목', '금', '토'],
+
+
+	// <table>
+	// <thead>
+	// 		<tr>
+	// 		<th>일</th>
+	// 		<th>월</th>
+	// 		<th>화</th>
+	// 		<th>수</th>
+	// 		<th>목</th>
+	// 		<th>금</th>
+	// 		<th>토</th>
+	// 	</tr>
+	// </thead>
 	makeHead() {
-		const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-		return days.reduce((acc, day) => {
-			return acc + '<th>' + day + '</th>';
-		}, '<thead><tr>')
+		let headHtml = '<table border="1"><thead><tr>';
+
+		this.weeks.forEach((obj) => {
+			headHtml += '<th>' + obj + '</th>';
+		});
+
+		headHtml += '</tr></thead>';
+		return headHtml;
 	},
+
 	makeBody() {
-		let tbody = '</tr></thead><tbody><tr>';
-		for (let i = 1; i <= 31; i++) {
-			let styles = '';
-			if(i % 7 == 1) {
-				styles = 'background:red; color:yellow;';
-				if(i == today.getDate()) {
-					styles += 'font-weight:bolder;';
-				}
-				tbody += '<td style="' + styles + '" align ="center">' + i + '</td>';
-			}else if(i % 7 == 0) {
-				styles += 'color:blue;';
-				tbody += '<td style="' + styles + '" align ="center">' + i + '</td>';
-			}else {
-				if(i == today.getDate()) {
-					styles += 'font-weight:bolder; background:yellow;';
-				}
-				tbody += '<td style="' + styles + '" align ="center">' + i + '</td>';
+		let bodyHtml = this.makeHead();
+
+		const today = new Date();
+
+		bodyHtml += "<tbody>";
+		// <tr>
+		let idx = 1; 
+		for(let i = 1; i <= 31; ++i, ++idx) {
+			if(idx == 1) {
+				bodyHtml += "<tr>";
+				bodyHtml += "<td class='sunday'>" + i + "</td>";
 			}
-			if (i % 7 == 0) {
-				tbody +=  '</tr><tr>';
+			else if(idx == 7) {
+				bodyHtml += "<td class='saturday'>" + i + "</td>";
+				bodyHtml += "</tr>";
+				idx = 0;
+			}
+			else {
+				if(i != today.getDate()) {
+					bodyHtml += "<td>" + i + "</td>";
+				}
+				else {
+					bodyHtml += "<td id='today'>" + i + "</td>";
+				}
 			}
 		}
-		tbody += '</tr></tbody>';
-		return tbody;
+		// </tr>
+		bodyHtml += "</tbody>";
+		return bodyHtml;
 	},
+
 	showCalendar() {
-		let thead = this.makeHead();
-		let tbody = this.makeBody();
-		let table = '<table border="1">' + thead + tbody + '</table>';
-		
-			document.getElementById('show').innerHTML = table;
+		 document.getElementById('show').innerHTML = this.makeBody();
 	}
 }
-cal.showCalendar();
+
+ 
+ cal.showCalendar();
+ export {cal}

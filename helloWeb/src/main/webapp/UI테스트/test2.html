@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test2.html</title>
+</head>
+<body>
+	<div id='show'></div>
+	<script>
+	const novemberCal = {
+	 weeks : ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		//makeHead()
+		makeHead() {
+			let headHtml = '<table border="1"><thead><tr>';
+			
+			this.weeks.forEach((obj) => {
+				headHtml += '<th>' + obj + '</th>';
+			});
+	
+			headHtml += '</tr></thead>';
+			return headHtml;
+		
+		},
+		//makeBody()
+		makeBody() {
+			let tbody = this.makeHead();
+			
+			bodyHtml = '</thead><tbody><tr>';
+			tbody += '<td></td><td></td><td></td>';
+			for (let i = 1; i <= 30; i++) {
+				if(i%7 == 5){
+					tbody += '<td style="background:red " td align="center">' + i + '</td>';
+				}
+				else {
+					tbody += '<td align="center">' + i + '</td>';
+				}
+				if(i%7 == 4){
+				tbody += '<tr></tr>';
+				}
+			}
+			tbody += '<td></td><td></td>';
+			tbody += '</tr></tbody>';
+			return tbody;
+		
+		},
+		
+		show() {
+			document.getElementById('show').innerHTML = this.makeBody();
+		}
+}
+		novemberCal.show();
+	</script>
+</body>
+</html>
