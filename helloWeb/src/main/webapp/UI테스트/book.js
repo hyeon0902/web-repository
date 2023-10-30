@@ -2,7 +2,7 @@ import { table } from './bookModule.js';
 
 let xhtp = new XMLHttpRequest();
 
-xhtp.open('get', '../../java/org/yedam/BookListServlet')
+xhtp.open('get', '../BookListServlet')
 xhtp.send();
 xhtp.onload = loadJSON;
 
