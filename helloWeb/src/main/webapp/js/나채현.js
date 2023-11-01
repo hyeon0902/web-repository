@@ -36,7 +36,6 @@ function fetchcallback(result){
 		let filterAry = rawData.filter(center => center.sido == searchSido);
 		genTable(filterAry); // 검색한 화면 출력.
 		}
-		
 	// 초기데이터로 화면 출력.
 	genTable(rawData);
 	//let filterAry = rawData.filter(center => center.sido == '대구광역시');
@@ -53,52 +52,6 @@ function genTable(rawData = [], page = 1){
 	
 	// 첫번째, 마지막 페이지 => 계산.
 	let totalCnt = rawData.length;
-	let lastPage = Math.ceil(totalCnt / 10);
-	let endPage = Math.ceil(page / 10) * 10;
-	let beginPage = endPage - 9;
-	let prevPage, 
-		nextPage = false;
-		
-		
-	if(beginPage > 1){
-		prevPage = true;
-	}
-	if(endPage < lastPage){
-		nextPage = true;
-	}
-	if(endPage > lastPage){
-		endPage = lastPage;
-	}
-	document.querySelector('.pagination').innerHTML = '';
-	
-	
-    //이전페이지 여부
-    if(prevPage){
-        let aTag = document.createElement('a');
-        aTag.setAttribute('href', '#');
-        aTag.innerHTML = '&laquo';
-        aTag.addEventListener('click', function(e){
-            genTable(rawData,beginPage-1);
-        })
-        document.querySelector('.pagination').append(aTag);
-    }
-
-
-    //전체페이지
-    for(let i=beginPage; i<=endPage; i++){
-        let aTag = document.createElement('a');
-        aTag.setAttribute('href', '#');
-        aTag.innerHTML = i+' ';
-        if(i == page){
-            aTag.setAttribute('class', 'active');
-        }
-
-        aTag.addEventListener('click', function(e){
-            genTable(rawData, i);
-
-        })
-        document.querySelector('.pagination').append(aTag);
-    }
 	
 	// 전체 rawData로 출력.
 	let table1 = document.createElement('table');
@@ -138,18 +91,6 @@ function genTable(rawData = [], page = 1){
 	table1.setAttribute('border','1');
 	document.getElementById('show').append(table1);
 
-    //다음페이지 여부
-    if(nextPage){
-        let aTag = document.createElement('a');
-        aTag.setAttribute('href', '#');
-        aTag.innerHTML = '&raquo';
-        aTag.addEventListener('click', function(e){
-            genTable(rawData,endPage + 1);
-        })
-        document.querySelector('.pagination').append(aTag);
-    }
-    
-    
 	// tr클릭이벤트 등록.
 	let targetTr = document.querySelectorAll('tbody tr')
 	targetTr.forEach(tr => {

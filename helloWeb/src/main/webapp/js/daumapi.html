@@ -2,29 +2,63 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>지도 생성하기</title>
+    <title>마커와 텍스트 표시하기</title>
     
 </head>
 <body>
-<!-- 지도를 표시할 div 입니다 -->
-<div id="map" style="width:1000px;height:700px;"></div>
+<!-- 이미지 지도를 표시할 div 입니다 -->
+<div id="staticMap" style="width:600px;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=029f4548cd5df388e476aa3d15210519"></script>
 <script>
+	
 	let href = location.href;
 	console.log(href);
 	let xpos = href.indexOf('?x=') + 3 ; 
 	let ypos = href.indexOf('&y=') + 3;
 	let lat = href.substring(xpos, ypos -3);
 	let lng = href.substring(ypos);
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+	
+// 이미지 지도에 표시할 마커입니다
+var marker = {
+    position: new kakao.maps.LatLng(lat, lng), 
+    text: '위치' // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+};
+
+var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
+    staticMapOption = { 
+        center: new kakao.maps.LatLng(lat, lng), // 이미지 지도의 중심좌표
+        level: 3, // 이미지 지도의 확대 레벨
+        marker: marker // 이미지 지도에 표시할 마커
     };
 
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+// 이미지 지도를 생성합니다
+var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+
+// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+function setMapType(maptype) { 
+    var roadmapControl = document.getElementById('btnRoadmap');
+    var skyviewControl = document.getElementById('btnSkyview'); 
+    if (maptype === 'roadmap') {
+        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+        roadmapControl.className = 'selected_btn';
+        skyviewControl.className = 'btn';
+    } else {
+        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+        skyviewControl.className = 'selected_btn';
+        roadmapControl.className = 'btn';
+    }
+}
+
+// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+function zoomIn() {
+    map.setLevel(map.getLevel() - 1);
+}
+
+// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+function zoomOut() {
+    map.setLevel(map.getLevel() + 1);
+}       
 </script>
 </body>
 </html>
