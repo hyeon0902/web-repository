@@ -18,7 +18,7 @@ public class MemberListControl implements Command {
 		List<MemberVO> list = svc.memberList();
 		System.out.println(list);
 		
-		req.setAttribute("list", list);
+		req.setAttribute("memberlist", list);
 		
 		
 		try {

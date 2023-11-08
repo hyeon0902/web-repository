@@ -12,11 +12,12 @@ import co.yedam.reply.service.ReplyVO;
 public class ReplyServiceImpl implements ReplyService{
 	
 	SqlSession session = DataSourceMybatis.getInstance().openSession(true);
+	
 	ReplyMapper mapper = session.getMapper(ReplyMapper.class);
 
 	@Override
-	public List<ReplyVO> replyList(int boardNo) {
-		return mapper.replyList(boardNo);
+	public List<ReplyVO> replyList(int boardNo, int page) {
+		return mapper.replyList(boardNo, page);
 	}
 
 	@Override
@@ -31,12 +32,16 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public boolean updateReply(ReplyVO vo) {
-		return false;
+		return mapper.updateReply(vo);
 	}
 
 	@Override
 	public boolean deleteReply(int replyNo) {
-		return false;
+		return mapper.deleteReply(replyNo);
 	}
-
+	
+	@Override
+	public int getTotalCnt(int boardNo) {
+		return mapper.getTotalCnt(boardNo);
+	}
 }

@@ -63,7 +63,7 @@ public class BoardDAO {
 	}// end list
 
 	public BoardVO select(int boardNo) {
-		sql = "select * from board1 where board_no = ?";
+		sql = "select * from board where board_no = ?";
 		BoardVO vo = new BoardVO();
 		conn = ds.getConnection();
 		try {
@@ -90,7 +90,7 @@ public class BoardDAO {
 	}// end select
 
 	public int insert(BoardVO vo) {
-		sql = "insert into board1(board_no, title, content, writer, image) "
+		sql = "insert into board(board_no, title, content, writer, image) "
 				+ "values(seq_board.nextval, ?, ?, ?, ?)";
 		conn = ds.getConnection();
 		try {
@@ -110,7 +110,7 @@ public class BoardDAO {
 	}// end insert
 
 	public int update(BoardVO vo) {
-		sql = "update board1 set title=?, content=?, writer=?,"
+		sql = "update board set title=?, content=?, writer=?,"
 				+ "image=nvl(?, image), last_update=sysdate where board_no=?";
 		conn = ds.getConnection();
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -133,7 +133,7 @@ public class BoardDAO {
 
 	public int delete(int boardNo) {
 		int r = 0;
-		String sql = "delete from board1 where board_no=?";
+		String sql = "delete from board where board_no=?";
 		conn = ds.getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class BoardDAO {
 	
 	//조회수 증가
 	public int updateCnt(int boardNo) {
-		sql = "update board1 set view_cnt=view_cnt+1 where board_no=?";
+		sql = "update board set view_cnt=view_cnt+1 where board_no=?";
 		conn = ds.getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -183,7 +183,7 @@ public class BoardDAO {
 				vo.setPass(rs.getString("pass"));
 				vo.setName(rs.getString("name"));
 				vo.setPhone(rs.getString("phone"));
-				vo.setResponsibility(rs.getString("responsibility"));
+				vo.setResponsbility(rs.getString("responsbility"));
 				return vo;
 			}
 			rs.close();
@@ -210,7 +210,7 @@ public class BoardDAO {
 				vo.setPass(rs.getString("pass"));
 				vo.setName(rs.getString("name"));
 				vo.setPhone(rs.getString("phone"));
-				vo.setResponsibility(rs.getString("responsibility"));
+				vo.setResponsbility(rs.getString("responsbility"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {

@@ -68,7 +68,9 @@ public class MainExe {
 //		vo.setReply("댓글수정테스트");
 //		vo.setReplyer("user14");
 //		mapper.updateReply(vo);
-		mapper.deleteReply(6);
+//		mapper.deleteReply(6);
+		
+		mapper.replyList(54,2).forEach(rep -> System.out.println(rep));
 		
 		
 
