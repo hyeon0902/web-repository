@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <jsp:include page="../layout/menu.jsp"></jsp:include>
 <jsp:include page="../layout/header.jsp"></jsp:include>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 #list span {
 	margin: 8px;
@@ -40,7 +40,8 @@
 			<th>글번호</th>
 			<td class="boardNo">${bno.boardNo }</td>
 			<th>작성일시</th>
-			<td><fmt:formatDate value="${bno.writeDate }" pattern="yyyy-MM-dd a HH:mm:ss"></fmt:formatDate></td>
+			<td><fmt:formatDate value="${bno.writeDate }"
+					pattern="yyyy-MM-dd a HH:mm:ss"></fmt:formatDate></td>
 		</tr>
 		<tr>
 			<th>글제목</th>
@@ -113,18 +114,20 @@
 		bno = document.querySelector('.boardNo').innerHTML;
 		let page = 1;
 
-		function showList(page = 1){
+		function showList(pg = 1){
 			document.querySelectorAll('#list li:not(:nth-of-type(1))') //
 				.forEach(li => li.remove()); // 첫번째 li는 template 용도라서 안지움.
 
-			fetch('replyList.do?bno='+bno + '&page=' + page)
+			fetch('replyList.do?bno='+bno + '&page=' + pg)
 			.then(resolve => resolve.json())
 			.then(result => {
 				console.log(result);
-				if (page < 0) { // 등록 시 
+				if (pg < 0) { // 등록 시 
 					page = Math.ceil(result.dto.total / 5);
-					page = result.dto.endPage;
 					showList(page);
+					return;
+				} else if (pg == 0) { // 삭제 시 
+					document.querySelector('.pagination').innerHTML = '';
 					return;
 				}
 				result.list.forEach(reply => {
@@ -156,7 +159,7 @@
 			for(let i=dto.startPage; i<=dto.endPage; i++){
 				let aTag = document.createElement('a');
 				aTag.setAttribute('href', i);
-				aTag.innerHTML = i + ' ';
+				aTag.innerHTML = i;
 				
 				// active 녹색
 				if (i == page){
@@ -221,9 +224,16 @@
 				.then(resolve => resolve.json())
 				.then(result => {
 					if(result.retCode == 'OK'){
-						alert('성공.')
+						e.target.parentElement.remove();
+						alert('삭제 성공.')
+						if(document.querySelectorAll('#list > li').length == 1) {
+							showList(-1);	
+						}
+						else {
+							showList(page);
+						}
 					}else{
-						alert('실패.')
+						alert('삭제 실패.')
 					}
 				})
 				.catch(err => console.log(err))

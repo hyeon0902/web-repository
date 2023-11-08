@@ -6,12 +6,14 @@ public class PageDTO {
 	boolean next, prev; // 이전, 이후.
 	int startPage, endPage;
 	int boardNo;
+	
+	
 // 11page  13page. ~ 20page. 258건. 52page.
 	public PageDTO(int boardNo, int total, int currentPage) {
+		this.boardNo = boardNo;
 		this.currentPage = currentPage;
 		int realEnd = (int) Math.ceil(total / 5.0);
 		
-		this.boardNo = boardNo;
 		this.total = total;
 		
 		this.endPage =  (int)Math.ceil(currentPage/10.0) * 10;

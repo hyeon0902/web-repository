@@ -44,8 +44,16 @@
 		delete from reply where
 		reply_no=#{replyNo}
 	</delete>
-	
+
 	<select id="getTotalCnt" resultType="int">
-		select count(*) from reply where board_no = #{boardNo}
+		select count(*) from reply
+		where board_no = #{boardNo}
+	</select>
+
+	<select id="getReplyCountPerWriter" resultType="map">
+		select replyer,
+		count(*) cnt
+		from reply
+		group by replyer
 	</select>
 </mapper>
