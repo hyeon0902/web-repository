@@ -3,7 +3,6 @@ package co.yedam.board.serviceImpl;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import co.yedam.board.mapper.BoardMapper;
 import co.yedam.board.service.BoardService;
