@@ -24,7 +24,7 @@
 				<td>${vo.boardNo }</td>
 				<td><a href="getBoard.do?bno=${vo.boardNo }">${vo.title }</a></td>
 				<td>${vo.writer }</td>
-				<td><fmt:formatDate value="${vo.writeDate }" pattern="yyyy-MM-dd a HH:mm:ss"></fmt:formatDate></td>
+				<td><fmt:formatDate value="${vo.writeDate }"  pattern="yyyy-MM-dd a HH:mm:ss"></fmt:formatDate></td>
 			</tr>
 			</c:forEach>
 		</tbody>

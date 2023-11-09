@@ -51,8 +51,8 @@
 	</select>
 
 	<select id="getReplyCountPerWriter" resultType="map">
-		select replyer,
-		count(*) cnt
+		select replyer
+		"replyer", count(*) "cnt"
 		from reply
 		group by replyer
 	</select>

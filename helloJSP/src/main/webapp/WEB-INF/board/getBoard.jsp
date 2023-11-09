@@ -195,7 +195,7 @@
 			fetch('addReply.do', {
 				method: 'post',
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				body: 'bno='+bno+'&reply='+reply+'&replyer='+writer
+				body: 'bno='+bno+'&reply='+reply+'&replyer='+writer+'&name'+name
 			})
 			.then(resolve => resolve.json())
 			.then(result => {

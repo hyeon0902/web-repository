@@ -17,6 +17,7 @@ public class LoginControl implements Command {
 		// TODO Auto-generated method stub
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pass");
+		String name = req.getParameter("name");
 		
 		BoardService svc = new BoardServiceImpl();
 		MemberVO vo = svc.loginCheck(id, pw);
@@ -24,6 +25,7 @@ public class LoginControl implements Command {
 		//Session : 서버-클라이언트   웹브라우저에서 로그아웃하거나 종료하기전엔 데이터가 계속 저장되있음
 		HttpSession session = req.getSession();
 		session.setAttribute("logId", id);
+		session.setAttribute("name", name);
 		session.setAttribute("responsbility", vo.getResponsbility());
 		if(svc.loginCheck(id, pw) != null) {
 			try {

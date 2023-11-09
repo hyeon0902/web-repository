@@ -57,7 +57,7 @@
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="#!">Profile</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="chartForm.do">작성사 건수 확인하기</a>
+					href="chartForm.do">작성자 댓글건수 확인하기</a>
 
 			</div>
 		</div>
