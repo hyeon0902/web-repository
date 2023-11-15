@@ -72,5 +72,6 @@ public class MainExe {
 		List<Map<String, Object>> map = mapper.getReplyCountPerWriter();
 		System.out.println(map);
 		
+		
 	}// endmaim
 }// end
